@@ -1,28 +1,46 @@
 <template>
   <div class="login-panel">
-    <!-- 顶部标题 -->
-    <h1 class="title">哦哦啊后台管理系统</h1>
+    <!-- 顶部的标题 -->
+    <h1 class="title">弘源后台管理系统</h1>
 
-    <!-- 中间tabs -->
+    <!-- 中间的tabs切换 -->
     <div class="tabs">
-      <el-tabs type="border-card" stretch>
-        <el-tab-pane label="账号登录">
-          <div>10969</div>
-          <div>10969</div>
+      <el-tabs type="border-card" stretch v-model="activeName">
+        <!-- 1.账号登录的Pane -->
+        <el-tab-pane name="account">
+          <template #label>
+            <div class="label">
+              <el-icon><UserFilled /></el-icon>
+              <span class="text">帐号登录</span>
+            </div>
+          </template>
+          <pane-account ref="accountRef" />
         </el-tab-pane>
-        <el-tab-pane label="手机登录">
-          <div>3636</div>
-          <div>3636</div>
+
+        <!-- 2.手机登录的Pane -->
+        <el-tab-pane name="phone">
+          <template #label>
+            <div class="label">
+              <el-icon><Cellphone /></el-icon>
+              <span class="text">手机登录</span>
+            </div>
+          </template>
+          <pane-phone />
         </el-tab-pane>
       </el-tabs>
     </div>
 
-    <!-- 底部 -->
+    <!-- 底部区域 -->
     <div class="controls">
       <el-checkbox v-model="isRemPwd" label="记住密码" size="large" />
       <el-link type="primary">忘记密码</el-link>
     </div>
-    <el-button class="login-btn" type="primary" size="large">
+    <el-button
+      class="login-btn"
+      type="primary"
+      size="large"
+      @click="handleLoginBtnClick"
+    >
       立即登录
     </el-button>
   </div>
@@ -30,8 +48,22 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
+import PaneAccount from "./panel-account.vue"
+import PanePhone from "./panel-phone.vue"
 
+const activeName = ref("account")
 const isRemPwd = ref(false)
+const accountRef = ref<InstanceType<typeof PaneAccount>>()
+
+function handleLoginBtnClick() {
+  if (activeName.value === "account") {
+    // 1.获取子组件的实例
+    accountRef.value?.loginAction()
+    // 2.调用方法
+  } else {
+    console.log("用户在进行手机登录")
+  }
+}
 </script>
 
 <style lang="less" scoped>

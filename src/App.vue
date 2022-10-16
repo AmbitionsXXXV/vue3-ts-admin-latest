@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
+import HelloWorld from "./components/HelloWorld.vue"
+import TheWelcome from "./components/TheWelcome.vue"
 
 interface Oor {
-  band: string;
+  band: string
 }
 
-const oorer: Oor = { band: "ONE OK ROCK" };
-console.log(oorer);
+const oorer: Oor = { band: "ONE OK ROCK" }
+console.log(oorer)
 </script>
 
 <template>

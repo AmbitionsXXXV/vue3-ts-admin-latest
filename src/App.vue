@@ -1,7 +1,14 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>ONE OK ROCK & Aimyon</h1>
+  <div class="app">
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.app {
+  width: 100vw;
+  height: 100vh;
+}
+</style>

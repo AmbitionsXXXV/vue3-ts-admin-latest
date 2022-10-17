@@ -6,6 +6,7 @@
       label-width="60px"
       status-icon
       size="large"
+      ref="formRef"
     >
       <el-form-item label="账号" prop="name">
         <el-input v-model="account.name" />
@@ -18,11 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue"
-import type { FormRules } from "element-plus"
+import { reactive, ref } from "vue"
+import { ElMessage, type ElForm, type FormRules } from "element-plus"
+import useLoginStore from "../../../store/login/login"
+import type { IAccount } from "@/types"
 
 // 1.定义account数据
-const account = reactive({
+const account = reactive<IAccount>({
   name: "",
   password: "",
 })
@@ -48,8 +51,21 @@ const accountRules: FormRules = {
 }
 
 // 3.执行账号的登录逻辑
+const formRef = ref<InstanceType<typeof ElForm>>()
+const loginStore = useLoginStore()
 function loginAction() {
-  console.log("执行账号的登录", account.name, account.password)
+  formRef.value?.validate((valid) => {
+    if (valid) {
+      // 1.获取用户输入的账号和密码
+      const name = account.name
+      const password = account.password
+
+      // 2.向服务器发送网络请求(携带账号密码)
+      loginStore.loginAccountAction({ name, password })
+    } else {
+      ElMessage.error("Ooops,请您按正确的格式输入")
+    }
+  })
 }
 
 defineExpose({

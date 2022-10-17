@@ -47,18 +47,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { localCache } from "@/utils/cache"
+import { ref, watch } from "vue"
 import PaneAccount from "./panel-account.vue"
 import PanePhone from "./panel-phone.vue"
 
 const activeName = ref("account")
-const isRemPwd = ref(false)
+const isRemPwd = ref<boolean>(localCache.getCache("isRemPwd") ?? false)
+watch(isRemPwd, (newValue) => {
+  localCache.setCache("isRemPwd", newValue)
+})
 const accountRef = ref<InstanceType<typeof PaneAccount>>()
 
 function handleLoginBtnClick() {
   if (activeName.value === "account") {
     // 1.获取子组件的实例
-    accountRef.value?.loginAction()
+    accountRef.value?.loginAction(isRemPwd.value)
+    if (isRemPwd.value) {
+      console.log("记住账号和密码")
+    }
     // 2.调用方法
   } else {
     console.log("用户在进行手机登录")

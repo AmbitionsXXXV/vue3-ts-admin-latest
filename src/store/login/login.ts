@@ -8,6 +8,7 @@ import type { IAccount } from "@/types"
 import { localCache } from "@/utils/cache"
 import router from "@/router"
 import { LOGIN_TOKEN } from "@/global/constants"
+import type { RouteRecordRaw } from "vue-router"
 
 interface ILoginState {
   token: string
@@ -43,6 +44,20 @@ const useLoginStore = defineStore("login", {
       // 4.进行本地缓存
       localCache.setCache("userInfo", userInfo)
       localCache.setCache("userMenus", userMenus)
+
+      // 动态添加路由
+      const localRoutes: RouteRecordRaw[] = []
+      // 1.1 读取router/main 所有的ts文件
+      const files: Record<string, any> = import.meta.glob(
+        "../../router/main/**/*.ts",
+        {
+          eager: true,
+        }
+      )
+      for (const key in files) {
+        const module = files[key]
+        localRoutes.push(module.default)
+      }
 
       // 5.页面跳转(main页面)
       router.push("/main")

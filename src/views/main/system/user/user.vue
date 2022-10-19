@@ -1,21 +1,18 @@
 <template>
   <div class="user">
     <UserSearch />
-    <div class="content">
-      <dlv class="header">头部</dlv>
-      <div class="table">表格</div>
-      <div class="pagination">分页</div>
-    </div>
+    <UserContent />
   </div>
 </template>
 
 <script setup lang="ts">
 import UserSearch from "./c-cpns/user-search.vue"
+import UserContent from "./c-cpns/user-content.vue"
 </script>
 
 <style lang="less" scoped>
 .user {
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
 </style>

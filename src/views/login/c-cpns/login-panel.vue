@@ -61,12 +61,7 @@ const accountRef = ref<InstanceType<typeof PaneAccount>>()
 
 function handleLoginBtnClick() {
   if (activeName.value === "account") {
-    // 1.获取子组件的实例
     accountRef.value?.loginAction(isRemPwd.value)
-    if (isRemPwd.value) {
-      console.log("记住账号和密码")
-    }
-    // 2.调用方法
   } else {
     console.log("用户在进行手机登录")
   }

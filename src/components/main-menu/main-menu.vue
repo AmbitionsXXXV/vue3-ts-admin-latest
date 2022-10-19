@@ -1,4 +1,3 @@
-import useLoginStore from '../../store/login/login';
 <template>
   <div class="main-menu">
     <!-- 1.Logo -->
@@ -11,7 +10,7 @@ import useLoginStore from '../../store/login/login';
     <div class="menu">
       <el-menu
         :collapse="isFold"
-        default-active="3"
+        :default-active="defaultActive"
         active-text-color="#fff"
         text-color="#b7bdc3"
         background-color="#001529"
@@ -44,7 +43,9 @@ import useLoginStore from '../../store/login/login';
 
 <script setup lang="ts">
 import useLoginStore from "@/store/login/login"
-import { useRouter } from "vue-router"
+import { useRoute, useRouter } from "vue-router"
+import { computed } from "vue"
+import { mapPathToMenu } from "@/utils/map-menus"
 
 // 1.定义 props
 defineProps({
@@ -65,6 +66,13 @@ function handleItemClick(item: any) {
   // console.log(url)
   router.push(url)
 }
+
+// 3.ElMenu 的默认选中菜单
+const route = useRoute()
+const defaultActive = computed(() => {
+  const pathMenu = mapPathToMenu(route.path, userMenus)
+  return pathMenu.id + ""
+})
 </script>
 
 <style lang="less" scoped>

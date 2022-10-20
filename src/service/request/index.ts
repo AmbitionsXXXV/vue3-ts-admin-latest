@@ -1,6 +1,6 @@
 import axios from "axios"
 import type { AxiosInstance } from "axios"
-import type { HYRequestConfig } from "./type"
+import type { ETCRequestConfig } from "./type"
 
 // 拦截器: 蒙版Loading/token/修改配置
 
@@ -14,11 +14,11 @@ import type { HYRequestConfig } from "./type"
  *  2.响应结果的类型处理(泛型)
  */
 
-class HYRequest {
+class ETCRequest {
   instance: AxiosInstance
 
   // request实例 => axios的实例
-  constructor(config: HYRequestConfig) {
+  constructor(config: ETCRequestConfig) {
     this.instance = axios.create(config)
 
     // 每个instance实例都添加拦截器
@@ -53,7 +53,7 @@ class HYRequest {
 
   // 封装网络请求的方法
   // T => IHomeData
-  request<T = any>(config: HYRequestConfig<T>) {
+  request<T = any>(config: ETCRequestConfig<T>) {
     // 单次请求的成功拦截处理
     if (config.interceptors?.requestSuccessFn) {
       config = config.interceptors.requestSuccessFn(config)
@@ -76,18 +76,18 @@ class HYRequest {
     })
   }
 
-  get<T = any>(config: HYRequestConfig<T>) {
+  get<T = any>(config: ETCRequestConfig<T>) {
     return this.request({ ...config, method: "GET" })
   }
-  post<T = any>(config: HYRequestConfig<T>) {
+  post<T = any>(config: ETCRequestConfig<T>) {
     return this.request({ ...config, method: "POST" })
   }
-  delete<T = any>(config: HYRequestConfig<T>) {
+  delete<T = any>(config: ETCRequestConfig<T>) {
     return this.request({ ...config, method: "DELETE" })
   }
-  patch<T = any>(config: HYRequestConfig<T>) {
+  patch<T = any>(config: ETCRequestConfig<T>) {
     return this.request({ ...config, method: "PATCH" })
   }
 }
 
-export default HYRequest
+export default ETCRequest

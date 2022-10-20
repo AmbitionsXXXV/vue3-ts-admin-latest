@@ -1,8 +1,8 @@
-import hyRequest from "@/service"
+import etcRequest from "@/service"
 
 /** 用户的网络请求 */
 export function postUsersListData() {
-  return hyRequest.post({
+  return etcRequest.post({
     url: "/users/list",
     data: {
       offset: 0,

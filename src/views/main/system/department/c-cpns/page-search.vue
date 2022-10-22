@@ -4,40 +4,19 @@
     <el-form :model="searchForm" ref="formRef" label-width="80px" size="large">
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-form-item label="用户名" prop="name">
+          <el-form-item label="部门名称" prop="name">
             <el-input
               v-model="searchForm.name"
-              placeholder="请输入查询的用户名"
+              placeholder="请输入查询的部门名称"
             />
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="真实姓名" prop="realname">
+          <el-form-item label="部门领导" prop="leader">
             <el-input
-              v-model="searchForm.realname"
-              placeholder="请输入查询的真实姓名"
+              v-model="searchForm.leader"
+              placeholder="请输入查询的部门领导"
             />
-          </el-form-item>
-        </el-col>
-        <el-col :span="8">
-          <el-form-item label="手机号码" prop="cellphone">
-            <el-input
-              v-model="searchForm.cellphone"
-              placeholder="请输入查询的手机号码"
-            />
-          </el-form-item>
-        </el-col>
-
-        <el-col :span="8">
-          <el-form-item label="状态" prop="enable">
-            <el-select
-              v-model="searchForm.enable"
-              placeholder="请选择查询的状态"
-              style="width: 100%"
-            >
-              <el-option label="启用" :value="1" />
-              <el-option label="禁用" :value="0" />
-            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -74,9 +53,7 @@ const emit = defineEmits(["queryClick", "resetClick"])
 // 定义form的数据
 const searchForm = reactive({
   name: "",
-  realname: "",
-  cellphone: "",
-  enable: 1,
+  leader: "",
   createAt: "",
 })
 

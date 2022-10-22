@@ -3,15 +3,15 @@ const searchConfig = {
     {
       type: "input",
       prop: "name",
-      label: "部门名称",
-      placeholder: "请输入查询的部门名称",
-      initialValue: "bbb",
+      label: "角色名称",
+      placeholder: "请输入查询的角色名称",
+      initialValue: "Etcetera",
     },
     {
       type: "input",
       prop: "leader",
-      label: "部门领导",
-      placeholder: "请输入查询的领导名称",
+      label: "权限介绍",
+      placeholder: "请输入查询的权限介绍",
     },
     {
       type: "date-picker",

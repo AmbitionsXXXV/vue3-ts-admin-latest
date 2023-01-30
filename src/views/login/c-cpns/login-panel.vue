@@ -1,7 +1,7 @@
 <template>
   <div class="login-panel">
     <!-- 顶部的标题 -->
-    <h1 class="title">弘源后台管理系统</h1>
+    <h1 class="title">Geek答题后台管理系统</h1>
 
     <!-- 中间的tabs切换 -->
     <div class="tabs">
